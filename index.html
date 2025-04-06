@@ -9,11 +9,23 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
       
         <style>
+          .hoverpic{
+            width:40vw; height: 40vw; float:left; margin-right:5px;margin-top: 8px;color:black;  box-shadow: -2px 2px 2px black;left:0px; position: absolute;border:none; transform: translateX(8px);
+          }
+          .hoverpic:hover{
+           animation: hoverpic 1s ease-in-out;
+           animation-direction:normal;
+           animation-fill-mode: forwards;
+          }
             .table{
 
                 grid-template-columns: repeat(7,14.3%);border:2px solid black;display:grid;text-align: center; width:100%;float:inline-start;
                 margin-bottom: 10px;
                 display: flexbox;
+            }
+            @keyframes hoverpic{
+              0%{opacity:1}
+              100%{opacity:0}
             }
 .table div{
 border-right: 2px solid black;
@@ -37,7 +49,9 @@ font-size: 14px;
     <body style="background-color: white;">
 
    <p style="text-align: center;font-size: 12px;text-wrap: wrap;">Pages 201-202: 'Die Arachniden Australiens, nach der Natur beschrieben und abgebildet' by E Keyserling 1887 <a href="https://archive.org/details/keyserling-1887" target="new">link</a></p><br>
-    <iframe src="Araneus_usualis2.svg" style="width:40vw; height: 40vw; float:left; margin-right:5px;margin-top: 8px;color:black; border:none; box-shadow: -2px 2px 2px black;left:0px;"></iframe>
+   <div style="width:40vw; height: 40vw; float:left; margin-right:5px;margin-top: 8px;color:black; margin-bottom: 10px;">
+    <iframe src="Araneus_usualis-colour.svg" style="width:40vw; height: 40vw; float:left; margin-right:5px;margin-top: 8px;color:black; border:none; box-shadow: -2px 2px 2px black;left:0px;"></iframe>
+    <iframe class="hoverpic" src="Araneus_usualis2.svg" ></iframe></div>
 <p>
         Translated from German to English. Image is an animated svg of Keyserlings sketch
         </p>    
