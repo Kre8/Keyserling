@@ -95,10 +95,10 @@ font-size: 19px; margin-left:20px;
 <div style="width:100%; text-align: center;">
         <span >
 <p style="display:inline; font-size: 12px;">current taxonomy:</p><br>
-          <p class="get_genus" style="display:inline" > sp:015274_ </p>
-          <p class="get_species" style="display:inline"> sp:015274</p>
+          <p  style="display:inline" >Araneus</p>
+          <p style="display:inline"> usualis</p>
   <br>
-          <p class="get_family" style="display:inline"  >sp:015274</p>
+          <p  style="display:inline">Araneidae</p>
         </span></div>
         <p>Female:
             <br>
@@ -220,59 +220,7 @@ font-size: 19px; margin-left:20px;
             The Abdomen colored just like that of the female, only the back is darker. The anterior outer corner of the mandibles protrudes sharply.<br><br>
             Mrs. Bradley received from Cape York and near Sydney a male and several females.
             </p>
-        <script >
-            async function fetchTaxonomyData() {
-    const csvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vT5ZziHAsffXxHzlL5hDNG6O5pBf3NXItfj7RKM06-LT8XCLB7wjOSpv3YhvSB-Qrtcb_YEDhvjclaE/pub?gid=1793549244&single=true&output=csv";
-    const response = await fetch(csvUrl);
-    const data = await response.text();
-    return parseCSV(data);
-  }
-
-  function parseCSV(data) {
-    const rows = data.split("\n").map(row => row.split(","));
-
-    // Skip the first row (headers) and extract relevant columns
-    const entries = rows.slice(1).map(row => ({
-  family: row[0]?.trim(),
-  genus: row[1]?.trim(),
-  species: row[2]?.trim(),
-  speciesNumber: row[12]?.replace(/sp:/, '').trim().padStart(6, '0'), 
-}));
-    console.log("Extracted Species Numbers:", entries.map(e => `"${e.speciesNumber}"`));
-    console.log("Parsed CSV Entries:", entries); // Debugging log
-    return entries;
-  }
-
-  function updateTaxonomyFields(entries) {
-    document.querySelectorAll("p").forEach(p => {
-      let text = p.innerText.trim();
-      console.log("Processing:", text);
-
-      const match = text.match(/sp:(\d+)/);
-      if (match) {
-        const speciesNum = match[1];
-        const entry = entries.find(e => e.speciesNumber === speciesNum);
-
-        if (entry) {
-          if (p.classList.contains("get_family")) p.innerText = entry.family;
-          if (p.classList.contains("get_genus")) p.innerText = entry.genus;
-          if (p.classList.contains("get_species")) p.innerText = entry.species;
-          if (p.classList.contains("get_fam_gen_spec")) p.innerText = `${entry.family} ${entry.genus} ${entry.species}`;
-          if (p.classList.contains("get_gen_spec")) p.innerText = `${entry.genus} ${entry.species}`;
-        } else {
-          p.innerText = `Unknown Species (${speciesNum})`;
-        }
-        console.log("Checking for species:", speciesNum, "Found:", entry);
-
-      }
-    });
     
-  }
-
-  async function init() {
-    const entries = await fetchTaxonomyData();
-    updateTaxonomyFields(entries);
-  }
 
   init();
         </script>
